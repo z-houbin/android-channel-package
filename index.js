@@ -24,12 +24,11 @@ function findApkFiles(directory) {
 }
 
 function logError(message) {
-    console.log(message)
     core.setFailed(message)
 }
 
 function logInfo(message) {
-    console.log(message)
+    core.info(message)
 }
 
 async function isFileExists(path) {
