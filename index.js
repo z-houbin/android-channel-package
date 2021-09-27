@@ -79,7 +79,7 @@ async function main() {
 
     let releaseDirectory = core.getInput('releaseDirectory')
 
-    for (let key in channelJSON) {
+    for await (let key in channelJSON) {
         logInfo('build.channel: ' + key)
         // 打渠道包
         await buildPackage(buildCommand + ' -PCHANNEL=' + key)
