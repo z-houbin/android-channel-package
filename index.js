@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const core = require('@actions/core')
 const child_process = require('child_process');
-const signApkFile = require('sign');
+const signLib = require('sign');
 const decoder = new TextDecoder('gbk');
 
 function buildPackage(cmd) {
@@ -42,8 +42,8 @@ async function main() {
     channelJSON = JSON.parse(channelJSON)
 
     // 签名配置信息
-    const buildDir = core.getInput('buildDirectory') ?? 'build'
-    const output = core.getInput('output') ?? path.join('build', 'signed')
+    const buildDir = core.getInput('buildDirectory') || 'build'
+    const output = core.getInput('output') || path.join('build', 'signed')
 
     const signingKeyBase64 = core.getInput('signingKeyBase64')
     const alias = core.getInput('alias')
@@ -66,8 +66,8 @@ async function main() {
         let apkFiles = findApkFiles(releaseDirectory)
         for (let releaseFile of apkFiles) {
             const releaseFilePath = path.join(releaseDirectory, releaseFile.name)
-            let signedReleaseFile = await signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
-            fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() ?? releaseFile.name))
+            let signedReleaseFile = await signLib.signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
+            fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name))
         }
     }
 }
