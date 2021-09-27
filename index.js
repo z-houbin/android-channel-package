@@ -53,7 +53,7 @@ async function main() {
     const buildDir = core.getInput('buildDirectory') || 'build'
     const output = core.getInput('output') || path.join('build', 'signed')
 
-    const signingKeyBase64 = fs.readFileSync(core.getInput('signFile') || 'signingKey.jks', 'utf8')
+    const signingKeyBase64 = core.getInput('signingKeyBase64')
     const alias = core.getInput('alias')
     const keyStorePassword = core.getInput('keyStorePassword')
     const keyPassword = core.getInput('keyPassword')
