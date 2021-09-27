@@ -82,7 +82,7 @@ async function main() {
     for (let key in channelJSON) {
         logInfo('build.channel: ' + key)
         // 打渠道包
-        await buildPackage(buildCommand + ' -PCHANNEL=' + key)
+        await buildPackage(buildCommand /*+ ' -PCHANNEL=' + key*/)
         logInfo('build.package finish')
 
         let data = child_process.execSync("ls -l ./app/build/intermediates/merged_assets/release/out").toString('utf8')
