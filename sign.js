@@ -7,8 +7,7 @@ const fs = require('fs')
 let sign = Object.assign({})
 
 sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassword, keyPassword) {
-
-    core.debug("Zipaligning APK file");
+    core.debug("signApkFile: " + apkFile + " " + signingKeyFile + " " + alias + " " + keyPassword + " " + keyPassword);
 
     // Find zipalign executable
     const buildToolsVersion = process.env.BUILD_TOOLS_VERSION || '30.0.2';

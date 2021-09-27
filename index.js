@@ -83,6 +83,7 @@ async function main() {
         logInfo('build.channel: ' + key)
         // 打渠道包
         await buildPackage(buildCommand + ' -PCHANNEL=' + key)
+        logInfo('build.package finish')
         // 签名渠道包
         let apkFiles = findApkFiles(releaseDirectory)
         for (let releaseFile of apkFiles) {
