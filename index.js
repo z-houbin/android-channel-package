@@ -71,6 +71,7 @@ async function main() {
     fs.writeFileSync(signingKey, signingKeyBase64, 'base64')
 
     logInfo('sign.file: ' + signingKey)
+    logInfo('sign.file2: ' + signingKeyBase64)
 
     logInfo('sign.file.exist: ' + await isFileExists(signingKey))
     logInfo('sign.file.exist2: ' + await isFileExists('build/signingKey.jks'))
