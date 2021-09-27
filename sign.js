@@ -9,6 +9,7 @@ let sign = Object.assign({})
 
 sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassword, keyPassword) {
     core.info("signApkFile: " + apkFile + " " + signingKeyFile + " " + alias + " " + keyStorePassword + " " + keyPassword);
+    core.info('signApkFile: size ' + JSON.stringify(util.statSync(apkFile)))
 
     // Find zipalign executable
     const buildToolsVersion = process.env.BUILD_TOOLS_VERSION || '30.0.2';
@@ -69,8 +70,8 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
     // Verify
     core.info("Verifying Signed APK");
     await exec.exec(`"${apkSigner}"`, [
-       'verify',
-       signedApkFile
+        'verify',
+        signedApkFile
     ]);
 
     return signedApkFile
