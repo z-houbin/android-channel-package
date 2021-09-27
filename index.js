@@ -6,7 +6,7 @@ const signLib = require('./sign');
 
 function buildPackage(cmd) {
     return new Promise(function (resolve, reject) {
-        let data = child_process.execSync(cmd)
+        let data = child_process.execSync(cmd).toString('utf8')
         console.log(data)
         if (data && data.indexOf('BUILD SUCCESSFUL') !== -1) {
             console.log('build package success')
