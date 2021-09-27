@@ -50,10 +50,16 @@ async function main() {
     const keyPassword = core.getInput('keyPassword')
     const signingKey = path.join(buildDir, 'signingKey.jks')
     const buildCommand = core.getInput('buildCommand')
-    fs.writeFileSync(signingKey, signingKeyBase64, 'base64')
+
     if (!fs.existsSync(output)) {
         fs.mkdirSync(output, {recursive: true})
     }
+    if (!fs.existsSync(buildDir)) {
+        fs.mkdirSync(buildDir, {recursive: true})
+    }
+
+    fs.writeFileSync(signingKey, signingKeyBase64, 'base64')
+
 
     let releaseDirectory = core.getInput('releaseDirectory')
 
