@@ -25,13 +25,11 @@ function findApkFiles(directory) {
 
 function logError(message) {
     console.log(message)
-    core.error(message)
     core.setFailed(message)
 }
 
 function logInfo(message) {
     console.log(message)
-    core.info(message)
 }
 
 async function isFileExists(path) {
@@ -76,6 +74,7 @@ async function main() {
     logInfo('sign.file: ' + signingKey)
 
     logInfo('sign.file.exist: ' + await isFileExists(signingKey))
+    logInfo('sign.file.exist2: ' + await isFileExists('build/signingKey.jks'))
 
     let releaseDirectory = core.getInput('releaseDirectory')
 
@@ -88,8 +87,8 @@ async function main() {
         let apkFiles = findApkFiles(releaseDirectory)
         for await (let releaseFile of apkFiles) {
             const releaseFilePath = path.join(releaseDirectory, releaseFile.name)
-            let signedReleaseFile = await signLib.signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
-            fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name))
+            //let signedReleaseFile = await signLib.signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
+            //fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name))
         }
     }
 }
