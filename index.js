@@ -84,6 +84,10 @@ async function main() {
         // 打渠道包
         await buildPackage(buildCommand + ' -PCHANNEL=' + key)
         logInfo('build.package finish')
+
+        let data = child_process.execSync("ls -l ./app/build/intermediates/merged_assets/release/out").toString('utf8')
+        console.log(data)
+
         // 签名渠道包
         let apkFiles = findApkFiles(releaseDirectory)
         for await (let releaseFile of apkFiles) {
