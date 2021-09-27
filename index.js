@@ -3,11 +3,10 @@ const path = require('path')
 const core = require('@actions/core')
 const child_process = require('child_process');
 const signLib = require('./sign');
-const decoder = new TextDecoder('gbk');
 
 function buildPackage(cmd) {
     return new Promise(function (resolve, reject) {
-        let data = decoder.decode(child_process.execSync(cmd))
+        let data = child_process.execSync(cmd)
         if (data && data.indexOf('BUILD SUCCESSFUL') !== -1) {
             console.log('build package success')
             resolve();
