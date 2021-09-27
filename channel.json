@@ -1,0 +1,18 @@
+{
+  "dzone": {
+    "CHANNEL": {
+      "type": "String",
+      "value": "chiyun"
+    }
+  },
+  "chiyun": {
+    "CHANNEL": {
+      "type": "String",
+      "value": "chiyun"
+    },
+    "WX_ACCESSIBILITY": {
+      "type": "boolean",
+      "value": true
+    }
+  }
+}
