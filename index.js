@@ -93,6 +93,7 @@ async function main() {
             let targetFile = path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name)
             logInfo('cop.b.file: ' + targetFile)
             logInfo('cop.b.file2: ' + await isFileExists(targetFile))
+            logInfo('cop.b.file3: ' + await isFileExists(output))
             fs.copyFileSync(signedReleaseFile, targetFile)
         }
     }
