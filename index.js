@@ -86,8 +86,8 @@ async function main() {
         let apkFiles = findApkFiles(releaseDirectory)
         for await (let releaseFile of apkFiles) {
             const releaseFilePath = path.join(releaseDirectory, releaseFile.name)
-            //let signedReleaseFile = await signLib.signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
-            //fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name))
+            let signedReleaseFile = await signLib.signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
+            fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name))
         }
     }
 }

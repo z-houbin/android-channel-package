@@ -58,14 +58,16 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
     }
     args.push(alignedApkFile);
 
+    core.debug('args: ' + args)
+
     await exec.exec(`"${apkSigner}"`, args);
 
     // Verify
     core.debug("Verifying Signed APK");
-    await exec.exec(`"${apkSigner}"`, [
-        'verify',
-        signedApkFile
-    ]);
+    //await exec.exec(`"${apkSigner}"`, [
+    //    'verify',
+    //    signedApkFile
+    //]);
 
     return signedApkFile
 }
