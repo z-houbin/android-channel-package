@@ -86,7 +86,7 @@ async function main() {
         logInfo('build.package finish')
         // 签名渠道包
         let apkFiles = findApkFiles(releaseDirectory)
-        for (let releaseFile of apkFiles) {
+        for await (let releaseFile of apkFiles) {
             const releaseFilePath = path.join(releaseDirectory, releaseFile.name)
             let signedReleaseFile = await signLib.signApkFile(releaseFilePath, signingKey, alias, keyStorePassword, keyPassword)
             fs.copyFileSync(signedReleaseFile, path.join(output, signedReleaseFile.split(/(\\|\/)/g).pop() || releaseFile.name))
