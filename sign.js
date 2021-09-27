@@ -2,12 +2,13 @@ const exec = require('@actions/exec')
 const core = require('@actions/core')
 const path = require('path')
 const fs = require('fs')
+const util = require('./util')
 
 
 let sign = Object.assign({})
 
 sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassword, keyPassword) {
-    core.info("signApkFile: " + apkFile + " " + signingKeyFile + " " + alias + " " + keyPassword + " " + keyPassword);
+    core.info("signApkFile: " + apkFile + " " + signingKeyFile + " " + alias + " " + keyStorePassword + " " + keyPassword);
 
     // Find zipalign executable
     const buildToolsVersion = process.env.BUILD_TOOLS_VERSION || '30.0.2';
@@ -59,6 +60,8 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
     args.push(alignedApkFile);
 
     core.info('args: ' + args)
+
+    core.info('sing.file.exists::::' + await util.isFileExists(signingKeyFile))
 
     await exec.exec(`"${apkSigner}"`, args);
 
