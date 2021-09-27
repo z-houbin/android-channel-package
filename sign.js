@@ -62,6 +62,7 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
     core.info('args: ' + args)
 
     core.info('sing.file.exists::::' + await util.isFileExists(signingKeyFile))
+    core.info('sing.file.stat::::' + util.statSync(signingKeyFile))
 
     await exec.exec(`"${apkSigner}"`, args);
 

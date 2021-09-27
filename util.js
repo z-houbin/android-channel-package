@@ -14,5 +14,9 @@ util.isFileExists = async function (path) {
     })
 }
 
+util.statSync = function (path) {
+    return fs.statSync(path)
+}
+
 
 module.exports = util
