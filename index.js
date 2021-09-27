@@ -38,9 +38,9 @@ async function isFileExists(path) {
     return new Promise(function (resolve, reject) {
         fs.access(path, fs.constants.R_OK, (err) => {
             if (err) {
-                reject()
+                resolve(false)
             } else {
-                resolve()
+                resolve(true)
             }
         });
     })
