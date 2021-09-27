@@ -34,6 +34,18 @@ function logInfo(message) {
     core.info(message)
 }
 
+async function isFileExists(path) {
+    return new Promise(function (resolve, reject) {
+        fs.access(path, fs.constants.R_OK, (err) => {
+            if (err) {
+                reject()
+            } else {
+                resolve()
+            }
+        });
+    })
+}
+
 async function main() {
     // 读取渠道配置文件
     let channelFileName = core.getInput('channelFile') || 'channel.json'
@@ -58,8 +70,12 @@ async function main() {
         fs.mkdirSync(buildDir, {recursive: true})
     }
 
+
     fs.writeFileSync(signingKey, signingKeyBase64, 'base64')
 
+    logInfo('sign.file: ' + signingKey)
+
+    logInfo('sign.file.exist: ' + await isFileExists(signingKey))
 
     let releaseDirectory = core.getInput('releaseDirectory')
 
