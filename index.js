@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const core = require('@actions/core')
 const child_process = require('child_process');
-const signLib = require('sign');
+const signLib = require('./sign');
 const decoder = new TextDecoder('gbk');
 
 function buildPackage(cmd) {

@@ -1,16 +1,12 @@
 const exec = require('@actions/exec')
 const core = require('@actions/core')
-const io = require('@actions/io')
 const path = require('path')
 const fs = require('fs')
 
-export async function signApkFile(
-    apkFile,
-    signingKeyFile,
-    alias,
-    keyStorePassword,
-    keyPassword
-) {
+
+let sign = Object.assign({})
+
+sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassword, keyPassword) {
 
     core.debug("Zipaligning APK file");
 
@@ -74,3 +70,5 @@ export async function signApkFile(
 
     return signedApkFile
 }
+
+module.exports = sign
