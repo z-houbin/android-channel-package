@@ -1,9 +1,8 @@
-import path from "path";
-import {signApkFile} from "./sign";
-
 const fs = require('fs')
+const path = require('path')
 const core = require('@actions/core')
 const child_process = require('child_process');
+const signApkFile = require('sign');
 const decoder = new TextDecoder('gbk');
 
 function buildPackage(cmd) {
