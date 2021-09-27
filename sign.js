@@ -7,7 +7,7 @@ const fs = require('fs')
 let sign = Object.assign({})
 
 sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassword, keyPassword) {
-    core.debug("signApkFile: " + apkFile + " " + signingKeyFile + " " + alias + " " + keyPassword + " " + keyPassword);
+    core.info("signApkFile: " + apkFile + " " + signingKeyFile + " " + alias + " " + keyPassword + " " + keyPassword);
 
     // Find zipalign executable
     const buildToolsVersion = process.env.BUILD_TOOLS_VERSION || '30.0.2';
@@ -22,7 +22,7 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
     }
 
     const zipAlign = path.join(buildTools, 'zipalign');
-    core.debug(`Found 'zipalign' @ ${zipAlign}`);
+    core.info(`Found 'zipalign' @ ${zipAlign}`);
 
     // Align the apk file
     const alignedApkFile = apkFile.replace('.apk', '-aligned.apk');
@@ -37,11 +37,11 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
         alignedApkFile
     ]);
 
-    core.debug("Signing APK file");
+    core.info("Signing APK file");
 
     // find apksigner path
     const apkSigner = path.join(buildTools, 'apksigner');
-    core.debug(`Found 'apksigner' @ ${apkSigner}`);
+    core.info(`Found 'apksigner' @ ${apkSigner}`);
 
     // apksigner sign --ks my-release-key.jks --out my-app-release.apk my-app-unsigned-aligned.apk
     const signedApkFile = apkFile.replace('.apk', '-signed.apk');
@@ -58,12 +58,12 @@ sign.signApkFile = async function (apkFile, signingKeyFile, alias, keyStorePassw
     }
     args.push(alignedApkFile);
 
-    core.debug('args: ' + args)
+    core.info('args: ' + args)
 
     await exec.exec(`"${apkSigner}"`, args);
 
     // Verify
-    core.debug("Verifying Signed APK");
+    core.info("Verifying Signed APK");
     //await exec.exec(`"${apkSigner}"`, [
     //    'verify',
     //    signedApkFile
